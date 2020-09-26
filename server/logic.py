@@ -1,15 +1,22 @@
 def logic(data, user):
     scores = [0] * len(data)
-    score_category_name = ['age', 'smoking', 'favoriteMusicGenre', 'favoriteAnimal', 'highestEducationLevel', 'profession','astrologicalSign']
-    score_category_pnts = [10, 9, 8, 7, 6, 5, 4]
+    score_category_name = ['age', 'smoking', 'favoriteMusicGenre', 'highestEducationLevel', 'profession','astrologicalSign']
+    score_category_pnts = [10, 9, 8, 7, 6]
     matching_points = [10, 8, 6, 4, 2]
+    max_score = 0
+
+    for i in range(len(score_category_pnts)):
+        max_score += matching_points[0] * score_category_pnts[i]
 
     for i in range(len(data)):
         scores[i] += age_score([3, 7, 10, 18], score_category_pnts[0], matching_points, user, data[i])
-        scores[i] += smoking_score(score_category_pnts[0], matching_points, user, data[i])
+        scores[i] += smoking_score(score_category_pnts[1], matching_points, user, data[i])
+        scores[i] += music_score(score_category_pnts[2], matching_points, user, data[i])
+        scores[i] += education_score(score_category_pnts[3], matching_points, user, data[i])
+        scores[i] += sign_score(score_category_pnts[4], matching_points, user, data[i])
         
-    for i in range(len(data)):
-        data[i]['score'] = scores[i]
+        scores[i] = (scores[i] / max_score) * 100
+        data[i]['score'] = round(scores[i], 2)
 
     return data
 
@@ -38,7 +45,7 @@ def smoking_score(category_points, matching_points, user, other_user):
         return matching_points[3] * category_points
 
 def music_score(category_points, matching_points, user, other_user):
-    music_cat_name = 'smoking'
+    music_cat_name = 'favoriteMusicGenre'
 
     if(user[music_cat_name] == other_user[music_cat_name]):
         return category_points * matching_points[0]
@@ -152,11 +159,9 @@ def music_score(category_points, matching_points, user, other_user):
     if(user[music_cat_name] == 'Alternative'):
         if(other_user[music_cat_name] == 'Rock'):
             return category_points * matching_points[1]
-        elif(other_user[music_cat_name] == 'Classical'):
+        elif(other_user[music_cat_name] == 'Jazz'):
             return category_points * matching_points[3]
-        elif(other_user[music_cat_name] == 'World'):
-            return category_points * matching_points[4]
-        elif(other_user[music_cat_name] == 'Raggae'):
+        elif(other_user[music_cat_name] == 'Hip-Hip/Rap'):
             return category_points * matching_points[4]
         elif(other_user[music_cat_name] == 'Religious'):
             return category_points * matching_points[5]
@@ -164,9 +169,96 @@ def music_score(category_points, matching_points, user, other_user):
     if(user[music_cat_name] == 'Rock'):
         if(other_user[music_cat_name] == 'Alternative'):
             return category_points * matching_points[1]
+        elif(other_user[music_cat_name] == 'Jazz'):
+            return category_points * matching_points[4]
+        elif(other_user[music_cat_name] == 'Hip-Hip/Rap'):
+            return category_points * matching_points[4]
         elif(other_user[music_cat_name] == 'Classical'):
+            return category_points * matching_points[5]
+    
+    if(user[music_cat_name] == 'Stage & Screen'):
+        if(other_user[music_cat_name] == 'Jazz'):
+            return category_points * matching_points[2]
+        elif(other_user[music_cat_name] == 'R&B'):
             return category_points * matching_points[3]
-        elif(other_user[music_cat_name] == 'World'):
+        elif(other_user[music_cat_name] == 'Classical'):
+            return category_points * matching_points[4]
+
+    if(user[music_cat_name] == 'New Age'):
+        if(other_user[music_cat_name] == 'World'):
+            return category_points * matching_points[1]
+        elif(other_user[music_cat_name] == 'Classical'):
             return category_points * matching_points[4]
         elif(other_user[music_cat_name] == 'Raggae'):
             return category_points * matching_points[4]
+    return 0
+
+def education_score(category_points, matching_points, user, other_user):
+    education_cat_name = 'highestEducationLevel'
+
+    if(user[education_cat_name] == other_user[education_cat_name]):
+        return category_points * matching_points[0]
+
+    if(user[education_cat_name] == 'PhD'):
+        if(other_user[education_cat_name] == 'none'):
+            return category_points * matching_points[5]
+        elif(other_user[education_cat_name] == 'high school'):
+            return category_points * matching_points[4]
+        else:
+            return category_points * matching_points[1]
+    elif(user[education_cat_name] == 'master\'s degree'):
+        if(other_user[education_cat_name] == 'none'):
+            return category_points * matching_points[5]
+        elif(other_user[education_cat_name] == 'high school'):
+            return category_points * matching_points[4]
+        else:
+            return category_points * matching_points[1]
+    elif(user[education_cat_name] == 'undergraduate degree'):
+        if(other_user[education_cat_name] == 'none'):
+            return category_points * matching_points[4]
+        elif(other_user[education_cat_name] == 'high school'):
+            return category_points * matching_points[3]
+        else:
+            return category_points * matching_points[2]
+    elif(user[education_cat_name] == 'high school'):
+        if(other_user[education_cat_name] == 'none'):
+            return category_points * matching_points[2]
+        else:
+            return category_points * matching_points[3]
+    else:
+        if(other_user[education_cat_name] == 'high school'):
+            return category_points * matching_points[2]
+        else:
+            return category_points * matching_points[3]
+
+def sign_score(category_points, matching_points, user, other_user):
+    sign_cat_name = 'astrologicalSign'
+
+    if(user[sign_cat_name] == 'Aries' or user[sign_cat_name] == 'Leo' or user[sign_cat_name] == 'Sagittarius'): # Fire
+        if(other_user[sign_cat_name] == 'Aries' or other_user[sign_cat_name] == 'Leo' or other_user[sign_cat_name] == 'Sagittarius'): #Fire
+            return category_points * matching_points[0]
+        elif(other_user[sign_cat_name] == 'Aquarius' or other_user[sign_cat_name] == 'Gemini' or other_user[sign_cat_name] == 'Libra'): #Air
+            return category_points * matching_points[1]
+        else:
+            return 0
+    elif(user[sign_cat_name] == 'Aquarius' or user[sign_cat_name] == 'Gemini' or user[sign_cat_name] == 'Libra'): # Air
+        if(other_user[sign_cat_name] == 'Aquarius' or other_user[sign_cat_name] == 'Gemini' or other_user[sign_cat_name] == 'Libra'): #Air
+            return category_points * matching_points[0]
+        elif(other_user[sign_cat_name] == 'Aries' or other_user[sign_cat_name] == 'Leo' or other_user[sign_cat_name] == 'Sagittarius'): #Fire
+            return category_points * matching_points[1]
+        else:
+            return 0
+    elif(user[sign_cat_name] == 'Scorpio' or user[sign_cat_name] == 'Cancer' or user[sign_cat_name] == 'Pisces'): # Water
+        if(other_user[sign_cat_name] == 'Scorpio' or other_user[sign_cat_name] == 'Cancer' or other_user[sign_cat_name] == 'Pisces'): #Water
+            return category_points * matching_points[0]
+        elif(other_user[sign_cat_name] == 'Taurus' or other_user[sign_cat_name] == 'Virgo' or other_user[sign_cat_name] == 'Capricorn'): #Earth
+            return category_points * matching_points[1]
+        else:
+            return 0
+    elif(user[sign_cat_name] == 'Taurus' or user[sign_cat_name] == 'Virgo' or user[sign_cat_name] == 'Capricorn'): #Earth
+        if(other_user[sign_cat_name] == 'Taurus' or other_user[sign_cat_name] == 'Virgo' or other_user[sign_cat_name] == 'Capricorn'): #Earth
+            return category_points * matching_points[0]
+        elif(other_user[sign_cat_name] == 'Scorpio' or other_user[sign_cat_name] == 'Cancer' or other_user[sign_cat_name] == 'Pisces'): #Water
+            return category_points * matching_points[1]
+        else:
+            return 0
