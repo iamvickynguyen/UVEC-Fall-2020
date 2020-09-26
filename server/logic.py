@@ -5,7 +5,7 @@ def logic(data, user):
     matching_points = [10, 8, 6, 4, 2]
     max_score = 0
 
-    for i in range(score_category_pnts):
+    for i in range(len(score_category_pnts)):
         max_score += matching_points[0] * score_category_pnts[i]
 
     for i in range(len(data)):
@@ -16,8 +16,9 @@ def logic(data, user):
         scores[i] += sign_score(score_category_pnts[4], matching_points, user, data[i])
         
         scores[i] = (scores[i] / max_score) * 100
+        data[i]['score'] = round(scores[i], 2)
 
-    return scores
+    return data
 
 def age_score(diff_arr, category_points, matching_points, user, other_user):
     age_cat_name = 'age'
@@ -44,7 +45,7 @@ def smoking_score(category_points, matching_points, user, other_user):
         return matching_points[3] * category_points
 
 def music_score(category_points, matching_points, user, other_user):
-    music_cat_name = 'smoking'
+    music_cat_name = 'favoriteMusicGenre'
 
     if(user[music_cat_name] == other_user[music_cat_name]):
         return category_points * matching_points[0]
@@ -190,6 +191,7 @@ def music_score(category_points, matching_points, user, other_user):
             return category_points * matching_points[4]
         elif(other_user[music_cat_name] == 'Raggae'):
             return category_points * matching_points[4]
+    return 0
 
 def education_score(category_points, matching_points, user, other_user):
     education_cat_name = 'highestEducationLevel'
