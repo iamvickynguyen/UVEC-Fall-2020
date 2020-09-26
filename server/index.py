@@ -1,5 +1,6 @@
 import csv
 import sqlite3
+import json
 from flask import Flask, request, make_response
 from flask_cors import CORS
 
@@ -42,6 +43,19 @@ if c.fetchone()[0]!=1 :
                 c.execute(sqlite_insert_with_param, (row))
                 conn.commit()
             line_count += 1
+
+@app.route('/postEmail', methods=['GET', 'POST'])
+def postEmail():
+    if request.method == 'POST':
+        data = json.loads(request.data)['email']
+        with sqlite3.connect("tinder.db") as conn:
+            c = conn.cursor()
+            c.execute("SELECT * FROM profile WHERE email=?", (data,))
+            rows = c.fetchall()
+            for row in rows:
+                print(row)
+            return make_response({'data': rows}, 200)
+        return make_response({'data': None}, 400)
 
 #close the connection
 conn.close()
