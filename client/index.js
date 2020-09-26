@@ -21,7 +21,8 @@ async function postEmail() {
 }
 
 // output is a list of key value [{firstName,lastName,gender,genderPreference,email,profession,lat,long,city,favoriteAnimal,favoriteMusicGenre,age,smoking,astrologicalSign,highestEducationLevel}]
-function doSomething(output) {
+export function doSomething(output) {
     // do something with the output here...
+    return output;
 }
 

@@ -29,7 +29,8 @@ body {
     font-size: 1.4rem;
     overflow-x: hidden;
     font-weight: 300;
-    background-color: var(--background);
+    /* background-color: var(--background); */
+    background-image: linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%);
 
 }
 

@@ -9,9 +9,13 @@ async function postEmail() {
         data: JSON.stringify({ 'email': emailInput }),
         contentType: 'application/json;charset=UTF-8',
         success: function (response) {
-            let responseData = JSON.parse(response);
-            console.log(responseData.data);
-            doSomething(responseData.data);
+            // let responseData = JSON.parse(response);
+            console.log(response.data);
+
+
+            // Simulate an HTTP redirect:
+            window.location.replace("http://127.0.0.1:5500/UVEC-Fall-2020/client/results/index.html");
+            generatePage(response.data);
         },
         error: function (err) {
             // console.log(err);
@@ -29,29 +33,40 @@ function doSomething(output) {
 
 
 // RESULT PAGE
-const userContainer = document.querySelector(".user-container");
-const next = document.querySelector(".btn-right");
-const prev = document.querySelector(".btn-left");
-const item = document.querySelector(".item-list");
-const resultContainer = document.querySelector(".result");
-const scoreContainer = document.querySelector(".score");
+function generatePage(data) {
+    const userContainer = document.querySelector(".user-container");
+    const next = document.querySelector(".btn-right");
+    const prev = document.querySelector(".btn-left");
+    const item = document.querySelector(".item-list");
+    const resultContainer = document.querySelector(".result");
+    const scoreContainer = document.querySelector(".score");
 
-let idx = 0;
-let results = [];
+    let idx = 0;
+    let results = data;
 
 
-console.log(next);
-console.log(prev);
-const userInfo = {
-    "name": "John Doe",
-    "age": "28",
-    "favoriteMusic": "rock",
-    "favoriteAnimal": "dog",
-    "city": "Victoria"
+    console.log(next);
+    console.log(prev);
+    const userInfo = {
+        "name": "John Doe",
+        "age": "28",
+        "favoriteMusic": "rock",
+        "favoriteAnimal": "dog",
+        "city": "Victoria"
+    }
+
+    next.addEventListener("click", nextResult);
+    prev.addEventListener("click", prevResult);
+
+    item.innerText = `${idx}/${results.length}`;
+
+    const score = document.createElement("h3");
+    score.classList.add("simple-card-title")
+    // score.innerText = `${results[idx][score]}`;
+    scoreContainer.appendChild(score);
+    generateUser(userInfo, userContainer);
 }
 
-next.addEventListener("click", nextResult);
-prev.addEventListener("click", prevResult);
 
 function generateUser(user, userContainer) {
     const name = document.createElement("h3");
@@ -64,15 +79,25 @@ function generateUser(user, userContainer) {
     age.innerText = `Age: ${user["age"]}`
     userContainer.children[0].appendChild(age);
 
+    const zodiac = document.createElement("p");
+    zodiac.classList.add("simple-card-desc");
+    zodiac.innerText = `Favorite Music: ${user["astrologicalSign"]}`
+    userContainer.children[0].appendChild(zodiac);
+
     const music = document.createElement("p");
     music.classList.add("simple-card-desc");
-    music.innerText = `Favorite Music: ${user["favoriteMusic"]}`
+    music.innerText = `Favorite Music: ${user["favoriteMusicGenre"]}`
     userContainer.children[0].appendChild(music);
 
     const animal = document.createElement("p");
     animal.classList.add("simple-card-desc");
     animal.innerText = `Favorite Animal: ${user["favoriteAnimal"]}`
     userContainer.children[0].appendChild(animal);
+
+    const job = document.createElement("p");
+    job.classList.add("simple-card-desc");
+    job.innerText = `Favorite Music: ${user["profession"]}`
+    userContainer.children[0].appendChild(job);
 
     const city = document.createElement("p");
     city.classList.add("simple-card-desc");
@@ -95,13 +120,7 @@ function prevResult(e) {
     idx--;
     generateUser(results[idx], resultContainer);
 }
-console.log(userContainer.children[0]);
 
-item.innerText = `${idx}/${results.length}`;
+// generatePage();
 
-const score = document.createElement("h3");
-score.classList.add("simple-card-title")
-// score.innerText = `${results[idx][score]}`;
-scoreContainer.appendChild(score);
-generateUser(userInfo, userContainer);
 
