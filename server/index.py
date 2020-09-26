@@ -60,8 +60,7 @@ def postEmail():
                 return make_response({'data': None}, 400)
 
             filteredData = getMatch(parseDict(rows[0]), c)
-            # responses = logic.logic(filteredData)
-            responses = filteredData # FIXME
+            responses = logic.logic(filteredData)
             return make_response({'data': responses}, 200)
         return make_response({'data': None}, 400)
 
