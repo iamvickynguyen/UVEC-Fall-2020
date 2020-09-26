@@ -1,6 +1,7 @@
 import csv
 import sqlite3
 import json
+import logic
 from flask import Flask, request, make_response
 from flask_cors import CORS
 
@@ -55,8 +56,9 @@ def postEmail():
 
             if len(rows) == 0:
                 return make_response({'data': None}, 400)
-            
-            responses = getMatch(parseDict(rows[0]), c)
+
+            filteredData = getMatch(parseDict(rows[0]), c)
+            responses = logic.logic(filteredData)
             return make_response({'data': responses}, 200)
         return make_response({'data': None}, 400)
 
