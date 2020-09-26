@@ -1,7 +1,9 @@
 import csv
 import sqlite3
 import json
+import math
 import logic
+import geopy.distance
 from flask import Flask, request, make_response
 from flask_cors import CORS
 
@@ -64,9 +66,26 @@ def postEmail():
 
 def getMatch(data, c):
     if data['genderPreference'] != 'anybody':
-        c.execute("SELECT * FROM profile WHERE gender=?", (data['genderPreference'],))
+        c.execute("SELECT * FROM profile WHERE gender=? AND email IS NOT ?", (data['genderPreference'], data['email'],))
+        genderFilter = c.fetchall()
+        rows = list(filter(lambda x: x[3] == data['gender'] if x[3] != 'anybody' else True, genderFilter))
+    else:
+        c.execute("SELECT * FROM profile WHERE genderPreference=? AND email IS NOT ?", (data['gender'], data['email'],))
         rows = c.fetchall()
-        return rows
+
+        if len(rows) == 0:
+            c.execute("SELECT * FROM profile WHERE email IS NOT ?", (data['email'],))
+            rows = c.fetchall()
+
+    # filter lat lng
+    coords_1 = (data['lat'], data['long'])
+    l = list(filter(lambda x: geopy.distance.geodesic(coords_1, (x[6], x[7])).km <= 500, rows)) # edit later
+
+    # return list of obj
+    result = []
+    for item in l:
+        result.append(parseDict(item))
+    return result
 
 # easy to get
 def parseDict(data):
