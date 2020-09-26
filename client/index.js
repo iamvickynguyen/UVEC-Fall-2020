@@ -7,9 +7,8 @@ async function postEmail() {
         data: JSON.stringify({'email': emailInput}),
         contentType: 'application/json;charset=UTF-8',
         success: function(response) {
-            let responseData = JSON.parse(response);
-            console.log(responseData.data);
-            doSomething(responseData.data);
+            console.log(response.data);
+            doSomething(response.data);
         },
         error: function(err) {
             // console.log(err);
