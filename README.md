@@ -4,4 +4,5 @@ Project for UVEC Programming Fall 2020
 install `pip3` <br>
 install `sqlite3` <br>
 `pip3 install flask` <br>
+`pip3 install flask-cors` <br>
 run `python3 index.py` in server folder
