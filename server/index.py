@@ -52,10 +52,27 @@ def postEmail():
             c = conn.cursor()
             c.execute("SELECT * FROM profile WHERE email=?", (data,))
             rows = c.fetchall()
-            for row in rows:
-                print(row)
-            return make_response({'data': rows}, 200)
+
+            if len(rows) == 0:
+                return make_response({'data': None}, 400)
+            
+            responses = getMatch(parseDict(rows[0]), c)
+            return make_response({'data': responses}, 200)
         return make_response({'data': None}, 400)
+
+def getMatch(data, c):
+    if data['genderPreference'] != 'anybody':
+        c.execute("SELECT * FROM profile WHERE gender=?", (data['genderPreference'],))
+        rows = c.fetchall()
+        return rows
+
+# easy to get
+def parseDict(data):
+    keys = ['firstName','lastName','gender','genderPreference','email','profession','lat','long','city','favoriteAnimal','favoriteMusicGenre','age','smoking','astrologicalSign','highestEducationLevel']
+    dict = {}
+    for i in range(len(data)):
+        dict[keys[i]] = data[i]
+    return dict
 
 #close the connection
 conn.close()
