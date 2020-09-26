@@ -79,7 +79,7 @@ def getMatch(data, c):
 
     # filter lat lng
     coords_1 = (data['lat'], data['long'])
-    l = list(filter(lambda x: geopy.distance.geodesic(coords_1, (x[6], x[7])).km <= 500, rows)) # edit later
+    l = list(filter(lambda x: geopy.distance.geodesic(coords_1, (x[6], x[7])).km <= 30, rows)) # edit later
 
     # return list of obj
     result = []
@@ -92,7 +92,12 @@ def parseDict(data):
     keys = ['firstName','lastName','gender','genderPreference','email','profession','lat','long','city','favoriteAnimal','favoriteMusicGenre','age','smoking','astrologicalSign','highestEducationLevel']
     dict = {}
     for i in range(len(data)):
-        dict[keys[i]] = data[i]
+        if i == 11:
+            dict[keys[i]] = int(data[i])
+        if i == 6 or i == 7:
+            dict[keys[i]] = float(data[i])
+        else:
+            dict[keys[i]] = data[i]
     return dict
 
 #close the connection

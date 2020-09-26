@@ -22,7 +22,7 @@ def logic(data, user):
 def age_score(diff_arr, category_points, matching_points, user, other_user):
     age_cat_name = 'age'
 
-    for i in len(diff_arr):
+    for i in range(len(diff_arr)):
         if(abs(other_user[age_cat_name] - user[age_cat_name]) <= diff_arr[i]):
             return category_points * matching_points[i]
 
