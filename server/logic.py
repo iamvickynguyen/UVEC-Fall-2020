@@ -5,13 +5,10 @@ def logic(data, user):
     matching_points = [10, 8, 6, 4, 2]
 
     for i in len(data):
-        for j in len(score_category_name):
-            scores[i] += age_score([3, 7, 10, 18], score_category_pnts[0], matching_points, user, data[i])
-            scores[i] += smoking_score(score_category_pnts[0], matching_points, user, data[i])
-            
-
-            
-            # else, the age is unrelaistic to match by
+        scores[i] += age_score([3, 7, 10, 18], score_category_pnts[0], matching_points, user, data[i])
+        scores[i] += smoking_score(score_category_pnts[0], matching_points, user, data[i])
+        
+        
     return scores
 
 def age_score(diff_arr, category_points, matching_points, user, other_user):
@@ -102,4 +99,72 @@ def music_score(category_points, matching_points, user, other_user):
         elif(other_user[music_cat_name] == 'Hip-Hop/Rap'):
             return category_points * matching_points[2]
     
-    
+    if(user[music_cat_name] == 'Classical'):
+        if(other_user[music_cat_name] == 'Jazz'):
+            return category_points * matching_points[2]
+        elif(other_user[music_cat_name] == 'R&B'):
+            return category_points * matching_points[2]
+        elif(other_user[music_cat_name] == 'Stage & Screen'):
+            return category_points * matching_points[2]
+        elif(other_user[music_cat_name] == 'Religious'):
+            return category_points * matching_points[3]
+
+    if(user[music_cat_name] == 'Country'):
+        if(other_user[music_cat_name] == 'Jazz'):
+            return category_points * matching_points[2]
+        elif(other_user[music_cat_name] == 'Religious'):
+            return category_points * matching_points[2]
+        elif(other_user[music_cat_name] == 'Rock'):
+            return category_points * matching_points[4]
+        elif(other_user[music_cat_name] == 'Alternative'):
+            return category_points * matching_points[4]
+
+    if(user[music_cat_name] == 'Pop'):
+        if(other_user[music_cat_name] == 'Hip-Hip/Rap'):
+            return category_points * matching_points[1]
+        elif(other_user[music_cat_name] == 'EDM'):
+            return category_points * matching_points[1]
+        elif(other_user[music_cat_name] == 'Latin'):
+            return category_points * matching_points[2]
+
+    if(user[music_cat_name] == 'Hip-Hip/Rap'):
+        if(other_user[music_cat_name] == 'Pop'):
+            return category_points * matching_points[1]
+        elif(other_user[music_cat_name] == 'EDM'):
+            return category_points * matching_points[2]
+        elif(other_user[music_cat_name] == 'Latin'):
+            return category_points * matching_points[3]
+
+    if(user[music_cat_name] == 'Religious'):
+        if(other_user[music_cat_name] == 'Country'):
+            return category_points * matching_points[2]
+        elif(other_user[music_cat_name] == 'Classical'):
+            return category_points * matching_points[3]
+        elif(other_user[music_cat_name] == 'World'):
+            return category_points * matching_points[4]
+        elif(other_user[music_cat_name] == 'Raggae'):
+            return category_points * matching_points[4]
+        elif(other_user[music_cat_name] == 'Alternative'):
+            return category_points * matching_points[5]
+
+    if(user[music_cat_name] == 'Alternative'):
+        if(other_user[music_cat_name] == 'Rock'):
+            return category_points * matching_points[1]
+        elif(other_user[music_cat_name] == 'Classical'):
+            return category_points * matching_points[3]
+        elif(other_user[music_cat_name] == 'World'):
+            return category_points * matching_points[4]
+        elif(other_user[music_cat_name] == 'Raggae'):
+            return category_points * matching_points[4]
+        elif(other_user[music_cat_name] == 'Religious'):
+            return category_points * matching_points[5]
+
+    if(user[music_cat_name] == 'Rock'):
+        if(other_user[music_cat_name] == 'Alternative'):
+            return category_points * matching_points[1]
+        elif(other_user[music_cat_name] == 'Classical'):
+            return category_points * matching_points[3]
+        elif(other_user[music_cat_name] == 'World'):
+            return category_points * matching_points[4]
+        elif(other_user[music_cat_name] == 'Raggae'):
+            return category_points * matching_points[4]
