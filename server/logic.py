@@ -1,20 +1,22 @@
 def logic(data, user):
-    scores = [0 * len(data)]
+    scores = [0] * len(data)
     score_category_name = ['age', 'smoking', 'favoriteMusicGenre', 'favoriteAnimal', 'highestEducationLevel', 'profession','astrologicalSign']
     score_category_pnts = [10, 9, 8, 7, 6, 5, 4]
     matching_points = [10, 8, 6, 4, 2]
 
-    for i in len(data):
+    for i in range(len(data)):
         scores[i] += age_score([3, 7, 10, 18], score_category_pnts[0], matching_points, user, data[i])
         scores[i] += smoking_score(score_category_pnts[0], matching_points, user, data[i])
         
-        
-    return scores
+    for i in range(len(data)):
+        data[i]['score'] = scores[i]
+
+    return data
 
 def age_score(diff_arr, category_points, matching_points, user, other_user):
     age_cat_name = 'age'
 
-    for i in len(diff_arr):
+    for i in range(len(diff_arr)):
         if(abs(other_user[age_cat_name] - user[age_cat_name]) <= diff_arr[i]):
             return category_points * matching_points[i]
 
