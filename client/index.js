@@ -14,7 +14,7 @@ async function postEmail() {
 
 
             // Simulate an HTTP redirect:
-            window.location.replace("http://127.0.0.1:5500/UVEC-Fall-2020/client/results/index.html");
+            // window.location.replace("http://127.0.0.1:5500/UVEC-Fall-2020/client/results/index.html");
             generatePage(response.data);
         },
         error: function (err) {
@@ -31,7 +31,7 @@ function doSomething(output) {
     // do something with the output here...
 }
 
-
+let idx = 1;
 // RESULT PAGE
 function generatePage(data) {
     const userContainer = document.querySelector(".user-container");
@@ -41,15 +41,9 @@ function generatePage(data) {
     const resultContainer = document.querySelector(".result");
     const scoreContainer = document.querySelector(".score");
 
-<<<<<<< HEAD
-    let idx = 0;
+    
     let results = data;
-    console.log(results);
-=======
-    let idx = 1;
-    let results = data;
-
->>>>>>> af5b716664997861869ef18d6717fd2bfc7be9c9
+    console.log(data);
 
     console.log(next);
     console.log(prev);
@@ -64,27 +58,14 @@ function generatePage(data) {
     next.addEventListener("click", nextResult);
     prev.addEventListener("click", prevResult);
 
-<<<<<<< HEAD
-    generateUser(results[0], userContainer);
-    generateUser(results[idx], resultContainer);
-
-    item.innerText = `${idx}/${results.length}`;
-
-=======
     item.innerText = `${idx}/${results.length}`;
     generateUser(results[0], userContainer);
     generateUser(results[idx], resultContainer);
 
->>>>>>> af5b716664997861869ef18d6717fd2bfc7be9c9
     const score = document.createElement("h3");
     score.classList.add("simple-card-title")
     score.innerText = `${results[idx]["score"]}`;
     scoreContainer.appendChild(score);
-<<<<<<< HEAD
-   
-    
-=======
->>>>>>> af5b716664997861869ef18d6717fd2bfc7be9c9
 
 }
 
