@@ -12,42 +12,67 @@
 </head>
 
 <body>
-    <header>
-        <h3>Your Results</h3>
-    </header>
-    <main>
-        <div class="results-table">
-            <div class="simple-card user-container">
-                <div class="simple-card-content">
+    <div id="homePage">
+        <header>Find your mate</header>
+        <div class="login-container">
+            <form action="#" class="login-form">
+                <div class="input-focus-effect">
+                    <input id="input-email" type="text" class="input-focus" />
+                    <label>Email</label>
                 </div>
-            </div>
-            <div class="score">
-                <i class="fas fa-heart"></i>
-            </div>
-            <div class="simple-card result">
-                <div class="simple-card-content">
-                    <!-- <h3 class="simple-card-title">John Doe</h3> -->
-                    <!-- <p class="simple-card-desc">
-                        Gender: Male
-                    </p>
-                    <p class="simple-card-desc">
-                        Age: 28
-                    </p>
-                    <p class="simple-card-desc">
-                        Favorite Music: Rock
-                    </p>
 
-                    <div class="simple-card-line"></div> -->
-                </div>
-            </div>
+                <button type="submit" onclick="postEmail()"><a href="#results">Post Email</a></button>
+            </form>
         </div>
+    </div>
+    <div id="results">
+        <header>
+            <h3>Your Results</h3>
+        </header>
+        <main>
+            <div class="results-table">
+                <div class="simple-card user-container">
+                    <div class="simple-card-content">
+                    </div>
+                </div>
+                <div class="score">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="simple-card result">
+                    <div class="simple-card-content">
+                        <!-- <h3 class="simple-card-title">John Doe</h3>
+                            <p class="simple-card-desc">
+                                Gender: Male
+                            </p>
+                            <p class="simple-card-desc">
+                                Age: 28
+                            </p>
+                            <p class="simple-card-desc">
+                                Favorite Music: Rock
+                            </p> -->
 
+                        <!-- <div class="simple-card-line"></div> -->
+                    </div>
+                </div>
+            </div>
+
+<<<<<<< HEAD
         <div class="arrows">
             <button class="button-effect btn-left"><i class="fal fa-long-arrow-left"></i>Prev</button>
             <div class="simple-card-title item-list"></div>
             <button class="button-effect btn-right">Next <i class="fal fa-long-arrow-right"></i></button>
         </div>
     </main>
+=======
+            <div class="arrows">
+                <button class="button-effect btn-left"><i class="fal fa-long-arrow-left"></i>Prev</button>
+                <div class="simple-card-title item-list"></div>
+                <button class="button-effect btn-right">Next <i class="fal fa-long-arrow-right"></i></button>
+            </div>
+        </main>
+    </div>
+
+>>>>>>> af5b716664997861869ef18d6717fd2bfc7be9c9
     <script src="../index.js"></script>
 </body>
 
