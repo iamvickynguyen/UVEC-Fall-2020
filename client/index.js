@@ -73,7 +73,7 @@ function generatePage(data) {
 function generateUser(user, userContainer) {
     const name = document.createElement("h3");
     name.classList.add("simple-card-title");
-    name.innerText = user["name"]
+    name.innerText = user["firstName"] + " " + user["lastName"]
     userContainer.children[0].appendChild(name);
 
     const age = document.createElement("p");
