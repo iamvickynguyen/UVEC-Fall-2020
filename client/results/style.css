@@ -2,7 +2,7 @@
 
 :root {
     --background: #ede6f8;
-    --primary: #08aeea;
+    --primary: #FF90B0;
     --secondary: #13D2B8;
     --purple: #bd93f9;
     --pink: #ff6bcb;
@@ -34,13 +34,121 @@ body {
 
 }
 
+
+
 header {
+    margin-top: 10rem;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 5rem;
     min-height: 20vh;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+input,
+button,
+textarea,
+select {
+    font-family: var(--font);
+    font-size: 1.4rem;
+    font-weight: 300;
+    outline: none;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+.login-form {
+    max-width: 35rem;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.login-form input {
+    padding: 1.5rem;
+    border: 1px solid #eee;
+    color: #333;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    display: block;
+    width: 100%;
+    transition: border 0.25s linear;
+    font-weight: normal;
+}
+
+.login-form input:focus {
+    border-color: var(--primary);
+}
+
+
+.login-form button {
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: 4px;
+    color: white;
+    background-color: var(--primary);
+    text-transform: uppercase;
+}
+
+
+
+.login-form input {
+    padding-right: 4rem;
+}
+
+.input-focus-effect {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.input-focus-effect input {
+    padding: 2.5rem 1rem 1rem;
+    border: 1px solid #f798b3;
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    transition: border 0.25s linear;
+    background-color: transparent;
+    outline: none;
+}
+
+.input-focus-effect input:focus {
+    border-color: var(--primary);
+    border-width: 2px;
+}
+
+.input-focus-effect input:focus+label {
+    transform: translateY(0);
+    top: 1rem;
+}
+
+.input-focus-effect label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #999;
+    transition: 0.25s linear;
+    font-size: 1.2rem;
+}
+
+.login-container {
+    width: 90%;
+    margin: auto;
+}
+
+.login-container form {
+    padding-top: 15rem;
+    margin: auto;
 }
 
 header h3 {

@@ -6,32 +6,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossOrigin="anonymous" />
-    <link rel="stylesheet" href="./style.css">
 
-    <title>Find your other half </title>
+    <link rel="stylesheet" href="./style.css">
+    <title>Find other half</title>
 </head>
 
 <body>
-    <header>Find your mate</header>
-    <div class="login-container">
-        <form action="#" class="login-form">
-            <div class="input-focus-effect">
-                <input id="input-email" type="text" class="input-focus" />
-                <label>Email</label>
+    <div id="homePage">
+        <header>Find your mate</header>
+        <div class="login-container">
+            <form action="#" class="login-form">
+                <div class="input-focus-effect">
+                    <input id="input-email" type="text" class="input-focus" />
+                    <label>Email</label>
+                </div>
+
+                <button type="submit" onclick="postEmail()"><a href="#results">Post Email</a></button>
+            </form>
+        </div>
+    </div>
+    <div id="results">
+        <header>
+            <h3>Your Results</h3>
+        </header>
+        <main>
+            <div class="results-table">
+                <div class="simple-card user-container">
+                    <div class="simple-card-content">
+                    </div>
+                </div>
+                <div class="score">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="simple-card result">
+                    <div class="simple-card-content">
+                        <!-- <h3 class="simple-card-title">John Doe</h3>
+                            <p class="simple-card-desc">
+                                Gender: Male
+                            </p>
+                            <p class="simple-card-desc">
+                                Age: 28
+                            </p>
+                            <p class="simple-card-desc">
+                                Favorite Music: Rock
+                            </p> -->
+
+                        <!-- <div class="simple-card-line"></div> -->
+                    </div>
+                </div>
             </div>
 
-            <button type="submit" onclick="postEmail()"><a href="./results/index.html">Post Email</a></button>
-        </form>
+            <div class="arrows">
+                <button class="button-effect btn-left"><i class="fal fa-long-arrow-left"></i>Prev</button>
+                <div class="simple-card-title item-list"></div>
+                <button class="button-effect btn-right">Next <i class="fal fa-long-arrow-right"></i></button>
+            </div>
+        </main>
     </div>
 
-
+    <script src="./index.js"></script>
 </body>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<script src="./app.js"></script>
 
 </html>
-
-<head>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossOrigin="anonymous" />
-</head>
